@@ -6,9 +6,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using SportsStore.Models;
 using SportsStore.Models.Repository;
-using SportsStore.Pages.Helpers;
-using System.Web.Routing;
-
 
 
 namespace SportsStore.Pages
@@ -20,28 +17,10 @@ namespace SportsStore.Pages
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (IsPostBack)
-            {
-                int selectedProductId;
-                if(int.TryParse(Request.Form["add"], out selectedProductId))
-                {
-                    Product selectedProduct = repo.Products
-                        .Where(p => p.ProductID == selectedProductId).FirstOrDefault();
-                    if(selectedProduct != null)
-                    {
-                        SessionHelper.GetCart(Session).AddItem(selectedProduct, 1);
-                        SessionHelper.Set(Session, SessionKey.RETURN_URL,
-                            Request.RawUrl);
 
-                        Response.Redirect(RouteTable.Routes
-                            .GetVirtualPath(null, "cart", null).VirtualPath);
-
-                    }
-                }
-            }
         }
 
-        public IEnumerable<Product> GetProducts()
+        protected IEnumerable<Product> GetProducts()
         {
             return FilterProducts()
                 .OrderBy(p => p.ProductID)
