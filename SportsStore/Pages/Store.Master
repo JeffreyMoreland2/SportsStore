@@ -1,6 +1,5 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Store.master.cs" Inherits="SportsStore.Pages.Store" %>
-
-<%@ Register TagPrefix="SS" TagName="CatLinks" Src="~/Controls/CategoryList.ascx" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Store.master.cs" 
+    Inherits="SportsStore.Pages.Store" %>
 
 <!DOCTYPE html>
 
@@ -8,10 +7,12 @@
 <head runat="server">
     <title>SportsStore</title>
     <link rel="stylesheet" href="/Content/Styles.css" />
+    <%: System.Web.Optimization.Scripts.Render("~/bundles/validation") %>
 </head>
 <body>
     <form id="form1" runat="server">
         <div id="header">
+            <SS:CartSummary runat="server" />
             <div class="title">SPORTS STORE</div>
         </div>
         <div id="categories">

@@ -6,6 +6,10 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using SportsStore.Models;
 using SportsStore.Pages.Helpers;
+using SportsStore.Models.Repository;
+using System.Web.Routing;
+
+
 
 
 namespace SportsStore.Pages
@@ -14,6 +18,20 @@ namespace SportsStore.Pages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (IsPostBack)
+            {
+                Repository repo = new Repository();
+                int productId;
+                if(int.TryParse(Request.Form["remove"], out productId))
+                {
+                    Product productToRemove = repo.Products
+                        .Where(p => p.ProductID == productId).FirstOrDefault();
+                    if(productToRemove != null)
+                    {
+                        SessionHelper.GetCart(Session).RemoveLine(productToRemove);
+                    }
+                }
+            }
 
         }
 
@@ -38,9 +56,13 @@ namespace SportsStore.Pages
             }
         }
 
-        public IEnumerable<SportsStore.Models.CartLine> Unnamed_GetData()
+        public string CheckoutUrl
         {
-            return null;
+            get
+            {
+                return RouteTable.Routes.GetVirtualPath(null, "checkout",
+                    null).VirtualPath;
+            }
         }
     }
 }

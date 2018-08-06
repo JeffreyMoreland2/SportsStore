@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Security;
 using System.Web.SessionState;
 using System.Web.Routing;
+using System.Web.Optimization;
+
 
 
 namespace SportsStore
@@ -16,6 +18,7 @@ namespace SportsStore
         protected void Application_Start(object sender, EventArgs e)
         {
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
 
        /* protected void Session_Start(object sender, EventArgs e)
