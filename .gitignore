@@ -260,3 +260,6 @@ paket-files/
 __pycache__/
 *.pyc
 /SportsStore/Properties/PublishProfiles/SportsStoreProfile.pubxml
+/SportsStore/Web.config
+/SportsStore/Web.Debug.config
+/SportsStore/Web.Release.config
